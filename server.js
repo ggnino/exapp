@@ -15,10 +15,10 @@ mongoose
 	.connect(db.mongoURI, {
 		useUnifiedTopology: true,
 		useNewUrlParser: true,
-		useCreateIndex: true
+		useCreateIndex: true,
 	})
 	.then(() => console.log("MongoDB Connected"))
-	.catch(err => console.log("ERROR: " + err));
+	.catch((err) => console.log("ERROR: " + err));
 
 const PORT = process.env.PORT || 5000;
 
@@ -29,10 +29,12 @@ app.use("/exercise", cors(), exercise);
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
 	// Set static folder
-	app.use(express.static("client/build"));
+	app.use(express.static("exercise-app/build"));
 
 	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+		res.sendFile(
+			path.resolve(__dirname, "exercise-app", "build", "index.html")
+		);
 	});
 }
 
